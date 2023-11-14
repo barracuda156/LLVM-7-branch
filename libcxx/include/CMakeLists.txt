@@ -44,6 +44,7 @@ set(files
   complex
   complex.h
   condition_variable
+  coroutine
   csetjmp
   csignal
   cstdarg
