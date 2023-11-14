@@ -165,6 +165,7 @@ if (LIBCXX_OSX_REEXPORT_SYSTEM_ABI_LIBRARY)
       "-install_name @rpath/libc++.1.dylib"
       "-Wl,-reexport_library,${LIBCXX_LIBRARY_DIR}/libc++abi.dylib"
       "-Wl,-unexported_symbols_list,${CMAKE_CURRENT_SOURCE_DIR}/libc++unexp.exp"
+      "/usr/lib/libgcc_s.10.5.dylib"
       "/usr/lib/libSystem.B.dylib")
   else()
     if (DEFINED CMAKE_OSX_SYSROOT AND NOT CMAKE_OSX_SYSROOT STREQUAL "")

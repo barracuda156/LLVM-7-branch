@@ -104,6 +104,7 @@ if ( APPLE )
       "-current_version 1"
       "-install_name @rpath/libc++abi.1.dylib")
     list(APPEND LIBCXXABI_LINK_FLAGS
+        "/usr/lib/libgcc_s.10.5.dylib"
         "/usr/lib/libSystem.B.dylib")
   else()
     list(APPEND LIBCXXABI_SHARED_LINK_FLAGS
