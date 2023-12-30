@@ -18,6 +18,8 @@ set(LIBCXXABI_SOURCES
   abort_message.cpp
   fallback_malloc.cpp
   private_typeinfo.cpp
+  # Emutls support
+  emutls.c
 )
 
 if (LIBCXXABI_ENABLE_NEW_DELETE_DEFINITIONS)
@@ -31,7 +33,7 @@ else()
   list(APPEND LIBCXXABI_SOURCES cxa_noexception.cpp)
 endif()
 
-if (LIBCXXABI_ENABLE_THREADS AND UNIX AND NOT (APPLE OR CYGWIN))
+if (LIBCXXABI_ENABLE_THREADS AND UNIX AND NOT CYGWIN)
   list(APPEND LIBCXXABI_SOURCES cxa_thread_atexit.cpp)
 endif()
 
@@ -93,7 +95,8 @@ if ( APPLE )
     list(APPEND LIBCXXABI_SHARED_LINK_FLAGS
       "-compatibility_version 1"
       "-current_version 1"
-      "-install_name @rpath/libc++abi.1.dylib")
+      "-install_name @rpath/libc++abi.1.dylib"
+      "-Wl,-undefined,dynamic_lookup")
     list(APPEND LIBCXXABI_LINK_FLAGS
         "/usr/lib/libgcc_s.10.5.dylib"
         "/usr/lib/libSystem.B.dylib")
@@ -102,14 +105,16 @@ if ( APPLE )
     list(APPEND LIBCXXABI_SHARED_LINK_FLAGS
       "-compatibility_version 1"
       "-current_version 1"
-      "-install_name @rpath/libc++abi.1.dylib")
+      "-install_name @rpath/libc++abi.1.dylib"
+      "-Wl,-undefined,dynamic_lookup")
     list(APPEND LIBCXXABI_LINK_FLAGS
         "/usr/lib/libgcc_s.10.5.dylib"
         "/usr/lib/libSystem.B.dylib")
   else()
     list(APPEND LIBCXXABI_SHARED_LINK_FLAGS
       "-compatibility_version 1"
-      "-install_name @rpath/libc++abi.1.dylib")
+      "-install_name @rpath/libc++abi.1.dylib"
+      "-Wl,-undefined,dynamic_lookup")
   endif()
 endif()
 
