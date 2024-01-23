@@ -74,7 +74,7 @@ std::__libcpp_condvar_t guard_cv = _LIBCPP_CONDVAR_INITIALIZER;
 
 typedef uint32_t lock_type;
 
-#if __LITTLE_ENDIAN__
+#if defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
 
 inline
 lock_type
@@ -90,7 +90,7 @@ set_lock(uint64_t& x, lock_type y)
     x = static_cast<uint64_t>(y) << 32;
 }
 
-#else  // __LITTLE_ENDIAN__
+#else  // __BYTE_ORDER__
 
 inline
 lock_type
@@ -106,7 +106,7 @@ set_lock(uint64_t& x, lock_type y)
     x = y;
 }
 
-#endif  // __LITTLE_ENDIAN__
+#endif  // __BYTE_ORDER__
 
 #else  // !__APPLE__ || __arm__
 
