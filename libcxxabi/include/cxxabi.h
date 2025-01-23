@@ -62,6 +62,9 @@ extern _LIBCXXABI_FUNC_VIS void __cxa_end_cleanup();
 #endif
 extern _LIBCXXABI_FUNC_VIS std::type_info *__cxa_current_exception_type();
 
+// GNU extension
+extern _LIBCXXABI_FUNC_VIS _LIBCXXABI_NORETURN void __cxa_call_terminate(void*) throw();
+
 // 2.5.4 Rethrowing Exceptions
 extern _LIBCXXABI_FUNC_VIS _LIBCXXABI_NORETURN void __cxa_rethrow();
 
