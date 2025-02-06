@@ -320,8 +320,8 @@ let hasSideEffects = 0 in {
 // on the cr register selected. Thus, post-ra anti-dep breaking must not
 // later change that register assignment.
 let hasExtraDefRegAllocReq = 1 in {
-def MTOCRF8: XFXForm_5a<31, 144, (outs crbitm:$FXM), (ins g8rc:$ST),
-                        "mtocrf $FXM, $ST", IIC_BrMCRX>,
+def MTOCRF8: XFXForm_5a<31, 144, (outs crbitm:$FXM), (ins g8rc:$rS),
+                        "mtocrf $FXM, $rS", IIC_BrMCRX>,
             PPC970_DGroup_First, PPC970_Unit_CRU;
 
 // Similarly to mtocrf, the mask for mtcrf must be prepared in a way that
