@@ -16,6 +16,7 @@
 #include "Targets/RuntimeDyldMachOARM.h"
 #include "Targets/RuntimeDyldMachOI386.h"
 #include "Targets/RuntimeDyldMachOX86_64.h"
+#include "Targets/RuntimeDyldMachOPPC.h"
 #include "llvm/ADT/STLExtras.h"
 #include "llvm/ADT/StringRef.h"
 
@@ -359,6 +360,8 @@ RuntimeDyldMachO::create(Triple::ArchType Arch,
     return make_unique<RuntimeDyldMachOI386>(MemMgr, Resolver);
   case Triple::x86_64:
     return make_unique<RuntimeDyldMachOX86_64>(MemMgr, Resolver);
+  case Triple::ppc:
+    return make_unique<RuntimeDyldMachOPPC>(MemMgr, Resolver);
   }
 }
 
