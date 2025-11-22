@@ -4927,6 +4927,7 @@ static void ExpandCryptoAEK(AArch64::ArchKind ArchKind,
       RequestedExtensions.push_back("aes");
       break;
     case AArch64::ArchKind::ARMV8_4A:
+    case AArch64::ArchKind::ARMV8_5A:
       RequestedExtensions.push_back("sm4");
       RequestedExtensions.push_back("sha3");
       RequestedExtensions.push_back("sha2");
@@ -4945,6 +4946,7 @@ static void ExpandCryptoAEK(AArch64::ArchKind ArchKind,
       RequestedExtensions.push_back("noaes");
       break;
     case AArch64::ArchKind::ARMV8_4A:
+    case AArch64::ArchKind::ARMV8_5A:
       RequestedExtensions.push_back("nosm4");
       RequestedExtensions.push_back("nosha3");
       RequestedExtensions.push_back("nosha2");
