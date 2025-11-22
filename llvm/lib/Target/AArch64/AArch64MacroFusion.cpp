@@ -132,6 +132,27 @@ static bool isAESPair(const MachineInstr *FirstMI,
   return false;
 }
 
+/// AESE/AESD/PMULL + EOR.
+static bool isCryptoEORPair(const MachineInstr *FirstMI,
+                           const MachineInstr &SecondMI) {
+  unsigned SecondOpcode = SecondMI.getOpcode();
+
+  if (SecondOpcode != AArch64::EORv16i8)
+    return false;
+
+  switch (FirstMI->getOpcode()) {
+  case AArch64::INSTRUCTION_LIST_END:
+  case AArch64::AESErr:
+  case AArch64::AESDrr:
+  case AArch64::PMULLv16i8:
+  case AArch64::PMULLv8i8:
+  case AArch64::PMULLv1i64:
+  case AArch64::PMULLv2i64:
+    return true;
+  }
+  return false;
+}
+
 // Fuse literal generation.
 static bool isLiteralsPair(const MachineInstr *FirstMI,
                            const MachineInstr &SecondMI) {
@@ -269,6 +290,8 @@ static bool shouldScheduleAdjacent(const TargetInstrInfo &TII,
   if (ST.hasArithmeticCbzFusion() && isArithmeticCbzPair(FirstMI, SecondMI))
     return true;
   if (ST.hasFuseAES() && isAESPair(FirstMI, SecondMI))
+    return true;
+  if (ST.hasFuseCryptoEOR() && isCryptoEORPair(FirstMI, SecondMI))
     return true;
   if (ST.hasFuseLiterals() && isLiteralsPair(FirstMI, SecondMI))
     return true;
