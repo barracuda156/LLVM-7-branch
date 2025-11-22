@@ -44,6 +44,7 @@ public:
     AppleA11,
     AppleA12,
     AppleA13,
+    AppleA14,
     CortexA35,
     CortexA53,
     CortexA55,
