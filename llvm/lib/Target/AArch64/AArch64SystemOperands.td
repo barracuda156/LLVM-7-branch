@@ -1328,5 +1328,5 @@ def : RWSysReg<"ZCR_EL12",         0b11, 0b101, 0b0001, 0b0010, 0b000>;
 
 // Cyclone specific system registers
 //                                 Op0    Op1     CRn     CRm    Op2
-let Requires = [{ {AArch64::ProcCyclone} }] in
+let Requires = [{ {AArch64::ProcAppleA7} }] in
 def : RWSysReg<"CPM_IOACC_CTL_EL3", 0b11, 0b111, 0b1111, 0b0010, 0b000>;
